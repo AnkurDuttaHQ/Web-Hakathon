@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: #d4af37; /* Gold */
+  --color-secondary: #ffffff; /* White */
+  --color-accent: #a1a1aa; /* Zinc 400 */
+  --color-dark: #000000;
+  --color-light: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-sans overflow-x-hidden;
+    -webkit-tap-highlight-color: transparent;
+    background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #000 100%);
+  }
+
+  /* Custom selection */
+  ::selection {
+    @apply bg-primary/30 text-white;
+  }
+
+  /* Hide scrollbar for clean mobile feel */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-3xl bg-white/[0.01] border border-white/5;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-3xl bg-black/60 border border-white/5;
+  }
+
+  .neo-glow {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+  }
+
+  .neo-glow-purple {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-primary;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-op 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+  }
+}
+
+@keyframes pulse-op {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.08; }
+}
